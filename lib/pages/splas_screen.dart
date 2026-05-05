@@ -35,7 +35,7 @@ class _SplasScreenState extends State<SplasScreen> {
         width: size.width,
         decoration: BoxDecoration(
           gradient: RadialGradient(
-            colors: [Colors.yellow, Colors.greenAccent, Colors.red],
+            colors: [Colors.white, Colors.white, Colors.lightBlueAccent],
           ),
         ),
         child: Column(
