@@ -13,18 +13,18 @@ class SplasScreen extends StatefulWidget {
 class _SplasScreenState extends State<SplasScreen> {
   late Timer ti;
   @override
-  void initState() {
-    // TODO: implement initState\
+   void initState() {
+     // TODO: implement initState\
 
-    ti = Timer.periodic(
-      Duration(milliseconds: 3000),
-          (timer) => Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => LoginPage()),
-      ),
-    );
-    super.initState();
-  }
+     ti = Timer.periodic(
+       Duration(milliseconds: 3000),
+       (timer) => Navigator.pushReplacement(
+         context,
+         MaterialPageRoute(builder: (context) => LoginPage()),
+       ),
+     );
+     super.initState();
+   }
 
   @override
   Widget build(BuildContext context) {
@@ -35,35 +35,20 @@ class _SplasScreenState extends State<SplasScreen> {
         width: size.width,
         decoration: BoxDecoration(
           gradient: RadialGradient(
-            colors: [Colors.white, Colors.white, Colors.lightBlueAccent],
+            colors: [
+              Colors.white,
+              Colors.white,
+              Colors.lightBlueAccent,
+            ],radius: 0.84,
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Stack(
           children: [
-            Text(
-              "BukaTutup",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            Icon(Icons.superscript_rounded),
-            SizedBox(height: 10), Text(
-              "Developed by",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),Text(
-              "Reza && Lucky",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+            Positioned(
+              left: 0,
+              right: 0,
+              top: 325,
+              child: Image.asset("aset/awa/logg.png", width: 520, height: 520),
             ),
           ],
         ),
