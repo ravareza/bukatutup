@@ -53,9 +53,12 @@ class _RegisterPageState extends State<RegisterPage>{
         height: size.height,
         width: size.width,
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('aset/awa/hitam.jpg'),
-            fit: BoxFit.cover,
+          gradient: RadialGradient(
+            colors: [
+              Colors.white,
+              Colors.white,
+              Colors.lightBlueAccent,
+            ],radius: 0.8,
           ),
         ),
         padding: EdgeInsets.all(20),
