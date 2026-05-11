@@ -72,7 +72,7 @@ class _RegisterPageState extends State<RegisterPage>{
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "ASTRONOMIK",
+                      "Register",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25,

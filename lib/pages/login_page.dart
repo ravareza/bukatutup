@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_uas/pages/forget_password.dart';
 import 'package:project_uas/pages/menu_page.dart';
 import 'package:project_uas/pages/register_page.dart';
 
@@ -60,7 +61,7 @@ class _LoginPageState extends State<LoginPage>  {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "ASTRONOMIK",
+                      "Login",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25,
@@ -72,7 +73,7 @@ class _LoginPageState extends State<LoginPage>  {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          "Username",
+                          "Nama",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -87,7 +88,7 @@ class _LoginPageState extends State<LoginPage>  {
                       obscureText: false,
                       decoration: InputDecoration(
                         filled: true,
-                        hintText: "Reza",
+                        hintText: "Username",
                         alignLabelWithHint: true,
                         focusColor: Colors.white,
                         fillColor: Colors.white,
@@ -124,7 +125,7 @@ class _LoginPageState extends State<LoginPage>  {
                           },
                           icon: Icon(_isObsercureIcon, color: Colors.black),
                         ),
-                        hintText: "12345678",
+                        hintText: "Password",
                         alignLabelWithHint: true,
                         focusColor: Colors.white,
                         fillColor: Colors.white,
@@ -148,6 +149,7 @@ class _LoginPageState extends State<LoginPage>  {
                           "Ingat saya",
                           style: TextStyle(color: Colors.white),
                         ),
+                        TextButton(onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ForgetPassword(),)), child: Text("Forget Password"))
                       ],
                     ),
                     Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
