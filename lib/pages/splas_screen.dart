@@ -39,7 +39,7 @@ class _SplasScreenState extends State<SplasScreen> {
               Colors.white,
               Colors.white,
               Colors.lightBlueAccent,
-            ],radius: 0.84,
+            ],radius: 0.8,
           ),
         ),
         child: Stack(

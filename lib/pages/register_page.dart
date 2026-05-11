@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_uas/pages/login_page.dart';
 import 'package:project_uas/pages/menu_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -8,21 +9,40 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage>  {
-  final TextEditingController _username = TextEditingController();
-  final TextEditingController _pasword = TextEditingController();
-  bool _isObsercure = true;
-  IconData _isObsercureIcon = Icons.remove_red_eye;
-  bool _remember = true;
+class _RegisterPageState extends State<RegisterPage>{
+  final TextEditingController _nama = TextEditingController();
+  final _username = TextEditingController();
+  final _password = TextEditingController();
+  final TextEditingController _confirmpassword = TextEditingController();
 
+  bool _obscure = true;
+  bool _rememberMe = true;
+  IconData _isObsercureIcon = Icons.remove_red_eye;
+  bool _sobcure = true;
+  IconData _sobcureIcon = Icons.remove_red_eye;
   void isObsercureTex() {
-    if (_isObsercure) {
-      _isObsercure = false;
+    if (_obscure) {
+      _obscure = false;
       _isObsercureIcon = Icons.remove_red_eye_outlined;
     } else {
-      _isObsercure = true;
+      _obscure = true;
       _isObsercureIcon = Icons.remove_red_eye;
     }
+  }
+  void isObsercureText() {
+    if (_sobcure) {
+      _sobcure = false;
+      _sobcureIcon = Icons.remove_red_eye_outlined;
+    } else {
+      _sobcure = true;
+      _sobcureIcon = Icons.remove_red_eye;
+    }
+  }
+
+  void isObscure() {
+    setState(() {
+      _obscure = !_obscure;
+    });
   }
 
   @override
@@ -30,169 +50,216 @@ class _RegisterPageState extends State<RegisterPage>  {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        width: size.width,
         height: size.height,
+        width: size.width,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("aset/awa/merah.jpg"),
+            image: AssetImage('aset/awa/hitam.jpg'),
             fit: BoxFit.cover,
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
+        padding: EdgeInsets.all(20),
+        child: Center(
+          child: SingleChildScrollView(
             child: Card(
               color: Colors.black45,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Hallo hallo",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          shadows: [
-                            BoxShadow(
-                              offset: Offset(1, 1),
-                              color: Colors.purpleAccent,
-                              blurRadius: 3,
-                              spreadRadius: 5,
-                            ),
-                          ],
-                        ),
+              child: Padding(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "ASTRONOMIK",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        color: Colors.white,
                       ),
-                      SizedBox(width: 20),
-                      Icon(Icons.thumb_up, size: 50, color: Colors.white),
-                    ],
-                  ),
-                  Text(
-                    "Login Dulu",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      shadows: [
-                        BoxShadow(
-                          offset: Offset(1, 1),
-                          color: Colors.purpleAccent,
-                          blurRadius: 3,
-                          spreadRadius: 5,
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Nama",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                  SizedBox(height: 30),
-                  TextField(
-                    controller: _username,
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      filled: true,
-                      hintText: "Username",
-                      alignLabelWithHint: true,
-                      focusColor: Colors.white,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  TextField(
-                    controller: _pasword,
-                    keyboardType: TextInputType.text,
-                    obscureText: _isObsercure,
-                    decoration: InputDecoration(
-                      filled: true,
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            isObsercureTex();
-                          });
-                        },
-                        icon: Icon(_isObsercureIcon, color: Colors.black),
-                      ),
-                      hintText: "Password",
-                      alignLabelWithHint: true,
-                      focusColor: Colors.white,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: _remember,
-                        onChanged: (value) {
-                          setState(() {
-                            _remember = !_remember;
-                          });
-                        },
-                      ),
-                      Text("Ingat Saya", style: TextStyle(color: Colors.white)),
-                    ],
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        if (_username.value.text == 'Rava Reza' &&
-                            _pasword.value.text == '1111') {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => MenuPage()),
-                          );
-                          showDialog(
-                            context: context,
-                            builder: (context) =>
-                                AlertDialog(title: Text("Login Berhasil"),),
-                          );
-                        } else {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: Text("Username atau Password salah"),
-                            ),
-                          );
-                        }
-                      });
-                    },
-                    child: Text("Login"),
-                  ),
-                  Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    children: [
-                      Text(
-                        "Belum Punya Akun???",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => RegisterPage(),
-                              ),
-                            );
-                          });
-                        },
-                        child: Text(
-                          'Register',
-                          style: TextStyle(
-                            color: Colors.lightBlueAccent,
-                            fontWeight: FontWeight.bold,
-                          ),
+                    TextField(
+                      controller: _nama,
+                      keyboardType: TextInputType.text,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        filled: true,
+                        hintText: "Rava reza",
+                        alignLabelWithHint: true,
+                        focusColor: Colors.white,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
                         ),
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Username",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    TextField(
+                      controller: _username,
+                      keyboardType: TextInputType.text,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        filled: true,
+                        hintText: "Reza",
+                        alignLabelWithHint: true,
+                        focusColor: Colors.white,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Password",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    TextField(
+                      controller: _password,
+                      keyboardType: TextInputType.text,
+                      obscureText: _obscure,
+                      decoration: InputDecoration(
+                        filled: true,
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isObsercureTex();
+                            });
+                          },
+                          icon: Icon(_isObsercureIcon, color: Colors.black),
+                        ),
+                        hintText: "12345678",
+                        alignLabelWithHint: true,
+                        focusColor: Colors.white,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Confirm Password",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    TextField(
+                      controller: _confirmpassword,
+                      keyboardType: TextInputType.text,
+                      obscureText: _sobcure,
+                      decoration: InputDecoration(
+                        filled: true,
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isObsercureText();
+                            });
+                          },
+                          icon: Icon(_sobcureIcon, color: Colors.black),
+                        ),
+                        hintText: "12345678",
+                        alignLabelWithHint: true,
+                        focusColor: Colors.white,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 30),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ElevatedButton(
+                          style: ButtonStyle(fixedSize: WidgetStatePropertyAll(Size(200, 1),),backgroundColor: WidgetStatePropertyAll( Colors.blueAccent,)),
+                          onPressed: () {
+                            setState(() {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => LoginPage(),
+                                ),
+                              );
+                            });
+                          },
+                          child: Text(
+                            "Batal",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ButtonStyle(fixedSize: WidgetStatePropertyAll(Size(200, 1),),backgroundColor: WidgetStatePropertyAll( Colors.redAccent,)),
+                          onPressed: () {
+                            setState(() {
+                              if (_confirmpassword.text == _password.text &&
+                                  _username.text.isNotEmpty &&
+                                  _password.text.isNotEmpty &&
+                                  _nama.text.isNotEmpty) {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) =>
+                                      AlertDialog(title: Text("Daftar Sukses")),
+                                );
+                              } else {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) =>
+                                      AlertDialog(title: Text("Daftar Gagal")),
+                                );
+                              }
+                            });
+                          },
+                          child: Text(
+                            "Daftar",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
