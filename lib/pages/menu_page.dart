@@ -40,9 +40,9 @@ class _MenuPageState extends State<MenuPage> {
         page: const ChartPage(),
       ),
       3: MenuModel(
+        label: "Profile",
         page: const ProfilePage(),
         icon: Icons.person,
-        label: "Profile",
         color: Colors.purpleAccent,
       ),
     }; // ✅ FIX: Missing closing `};` for the map — caused entire class to break

@@ -10,7 +10,7 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage>  {
+class _LoginPageState extends State<LoginPage> {
   final _username = TextEditingController();
   final _password = TextEditingController();
 
@@ -43,11 +43,8 @@ class _LoginPageState extends State<LoginPage>  {
         width: size.width,
         decoration: BoxDecoration(
           gradient: RadialGradient(
-            colors: [
-              Colors.white,
-              Colors.white,
-              Colors.lightBlueAccent,
-            ],radius: 0.8,
+            colors: [Colors.white, Colors.white, Colors.lightBlueAccent],
+            radius: 0.8,
           ),
         ),
         padding: EdgeInsets.all(20),
@@ -137,39 +134,68 @@ class _LoginPageState extends State<LoginPage>  {
                     SizedBox(height: 20),
                     Row(
                       children: [
-                        Checkbox(
-                          value: _rememberMe,
-                          onChanged: (value) {
-                            setState(() {
-                              _rememberMe = !_rememberMe;
-                            });
-                          },
-                        ),
-                        Text(
-                          "Ingat saya",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        TextButton(onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ForgetPassword(),)), child: Text("Forget Password"))
-                      ],
-                    ),
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [ElevatedButton(
-                        style: ButtonStyle(fixedSize: WidgetStatePropertyAll(Size(200, 1),),backgroundColor: WidgetStatePropertyAll( Colors.redAccent,)),
-                        onPressed: () {
-                          setState(() {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage(),));
-                          });
-                        },
-                        child: Text(
-                          "Daftar",
-                          style: TextStyle(color: Colors.white),
+                        Column(children: [
+                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ForgetPassword(),
                         ),
                       ),
+                      child: Text(
+                        "Forget Password",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+                ],
+              ),]),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
                         ElevatedButton(
-                          style: ButtonStyle(fixedSize: WidgetStatePropertyAll(Size(200, 1),),backgroundColor: WidgetStatePropertyAll( Colors.blueAccent,)),
+                          style: ButtonStyle(
+                            fixedSize: WidgetStatePropertyAll(Size(200, 1)),
+                            backgroundColor: WidgetStatePropertyAll(
+                              Colors.redAccent,
+                            ),
+                          ),
                           onPressed: () {
                             setState(() {
-                              if (_username.text == "Rava" && _password.text == "Reza") {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => RegisterPage(),
+                                ),
+                              );
+                            });
+                          },
+                          child: Text(
+                            "Daftar",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            fixedSize: WidgetStatePropertyAll(Size(200, 1)),
+                            backgroundColor: WidgetStatePropertyAll(
+                              Colors.blueAccent,
+                            ),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MenuPage(),
+                                ),
+                              );
+                              if (_username.text == "Rava" &&
+                                  _password.text == "Reza") {
                                 showDialog(
                                   context: context,
                                   builder: (context) =>
@@ -189,7 +215,6 @@ class _LoginPageState extends State<LoginPage>  {
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
-
                       ],
                     ),
                   ],
@@ -202,4 +227,3 @@ class _LoginPageState extends State<LoginPage>  {
     );
   }
 }
-
