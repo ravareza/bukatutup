@@ -39,12 +39,12 @@ class _BannerHeaderState extends State<BannerHeader> {
                 ),
               ],
             ),
-          ),
+          ),SizedBox(height: 100,),
           Text(widget.subtitle,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Colors.limeAccent,
+              color: Colors.black,
               shadows: [
                 BoxShadow(
                   offset: Offset(1, 1),

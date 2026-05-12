@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:project_uas/pages/detail_page.dart';
+import 'package:project_uas/services/product_list.dart';
 import 'package:project_uas/widgets/banner_header.dart';
+import 'package:project_uas/widgets/product_widget.dart';
 
 import '../services/category_service.dart';
 
@@ -13,6 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    var nonFavorite = pro;
     var size = MediaQuery.of(context).size;
     return Scaffold(
       body: SizedBox(
@@ -29,15 +33,12 @@ class _HomePageState extends State<HomePage> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(5)
+                    borderRadius: BorderRadius.circular(5),
                   ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Icon(Icons.search),
-                      Text('Search')
-                    ],
+                    children: [Icon(Icons.search), Text('Search')],
                   ),
                 ),
               ),
@@ -56,14 +57,14 @@ class _HomePageState extends State<HomePage> {
                     subtitle: "diskon 50%",
                   ),
                   BannerHeader(
-                    imageAsset: "aset/awa/kitsune.png",
-                    title: "Promo belanja 1 miliar",
-                    subtitle: "diskon 30%",
+                    imageAsset: "aset/awa/promo1.jpg",
+                    title: "",
+                    subtitle: "",
                   ),
                   BannerHeader(
-                    imageAsset: "aset/awa/ruby.png",
-                    title: "Promo promo belanja 30 miliar",
-                    subtitle: "diskon 10%",
+                    imageAsset: "aset/awa/code.png",
+                    title: "",
+                    subtitle: "#100peng",
                   ),
                 ],
               ),
@@ -102,6 +103,37 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
+            //pruduct
+              Container(
+                width: size.width,
+                height: pro.length / 2 * 240,
+                padding: EdgeInsets.all(10),
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: 0.8,
+                  ),
+                  itemCount: pro.length,
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, s) => ProductWidget(
+                    name: nonFavorite[s].name,
+                    price: nonFavorite[s].price.toString(),
+                    ratings: nonFavorite[s].ratings.toString(),
+                    img: nonFavorite[s].img,
+                    onfavorite: () {
+                      setState(() {
+                        nonFavorite[s].favorite = true;
+                      });
+                    },
+                    width: size.width / 2,
+                    height: 200,
+                  ),
+                ),
+              ),
           ],
         ),
       ),

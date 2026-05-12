@@ -45,7 +45,7 @@ class _MenuPageState extends State<MenuPage> {
         icon: Icons.person,
         color: Colors.deepPurpleAccent,
       ),
-    }; // ✅ FIX: Missing closing `};` for the map — caused entire class to break
+    };
   }
 
   @override
