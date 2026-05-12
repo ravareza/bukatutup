@@ -6,5 +6,10 @@ class MenuModel {
   final Color color;
   final Widget page;
 
-  MenuModel({required this.label, required this.icon, required this.color, required this.page});
+  MenuModel({
+    required this.label,
+    required this.icon,
+    required this.color,
+    required this.page,
+  });
 }

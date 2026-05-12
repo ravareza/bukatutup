@@ -10,8 +10,8 @@ class FavoritePage extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            height: 90,
-            padding: const EdgeInsets.only(top: 30, left: 10),
+            height: 70,
+            padding: const EdgeInsets.only(top: 20, left: 10),
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,

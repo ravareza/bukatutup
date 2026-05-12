@@ -7,7 +7,11 @@ class CategoryModel {
   final Color color;
   final Widget page;
 
-  CategoryModel({required this.id, required this.icon, required this.labelcat, required this.color, required this.page});
-
-
+  CategoryModel({
+    required this.id,
+    required this.icon,
+    required this.labelcat,
+    required this.color,
+    required this.page,
+  });
 }

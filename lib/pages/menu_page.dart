@@ -25,27 +25,27 @@ class _MenuPageState extends State<MenuPage> {
         page: const HomePage(),
         icon: Icons.home,
         label: "Home",
-        color: Colors.deepPurpleAccent,
+        color: Colors.blue,
       ),
       1: MenuModel(
         label: "Favorite",
         icon: Icons.favorite,
-        color: Colors.deepPurpleAccent,
+        color: Colors.blue,
         page: const FavoritePage(),
       ),
       2: MenuModel(
         label: "Cart",
         icon: Icons.shopping_cart,
-        color: Colors.deepPurpleAccent,
+        color: Colors.blue,
         page: const ChartPage(),
       ),
       3: MenuModel(
         label: "Profile",
         page: const ProfilePage(),
         icon: Icons.person,
-        color: Colors.deepPurpleAccent,
+        color: Colors.blue,
       ),
-    }; // ✅ FIX: Missing closing `};` for the map — caused entire class to break
+    };
   }
 
   @override
@@ -66,9 +66,7 @@ class _MenuPageState extends State<MenuPage> {
         ),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.white, Colors.black],
-            ),
+            gradient: LinearGradient(colors: [Colors.blue, Colors.blueAccent]),
           ),
         ),
       ),
@@ -85,7 +83,56 @@ class _MenuPageState extends State<MenuPage> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: const Icon(Icons.arrow_back),
+                    icon: const Icon(Icons.arrow_back_ios_new),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Profile",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Settings",
+                      style: TextStyle(color: Colors.black),
+                    ),
+
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Alamat",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Pesanan",
+                      style: TextStyle(color: Colors.black),
+                    ),
                   ),
                 ],
               ),
@@ -104,12 +151,12 @@ class _MenuPageState extends State<MenuPage> {
         items: apa.entries
             .map(
               (s) => BottomNavigationBarItem(
-            icon: Icon(s.value.icon),
-            activeIcon: Icon(s.value.icon),
-            label: s.value.label,
-            backgroundColor: s.value.color,
-          ),
-        )
+                icon: Icon(s.value.icon),
+                activeIcon: Icon(s.value.icon),
+                label: s.value.label,
+                backgroundColor: s.value.color,
+              ),
+            )
             .toList(),
       ),
       body: apa[selected]?.page,
