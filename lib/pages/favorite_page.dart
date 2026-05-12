@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/product_list.dart';
+
 class FavoritePage extends StatefulWidget {
   const FavoritePage({super.key});
 
@@ -9,7 +10,6 @@ class FavoritePage extends StatefulWidget {
 }
 
 class _FavoritePageState extends State<FavoritePage> {
-
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -27,12 +27,10 @@ class _FavoritePageState extends State<FavoritePage> {
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Favorite"),
-                    ],
+                    children: [Text("Favorite")],
                   ),
                   SizedBox(
-                    width: size.width ,
+                    width: size.width,
                     height: size.height,
                     child: ListView.builder(
                       scrollDirection: Axis.vertical,
@@ -57,8 +55,23 @@ class _FavoritePageState extends State<FavoritePage> {
                                   Expanded(
                                     child: Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                       children: [
+                                        Align(
+                                          alignment: Alignment.topRight,
+                                          child: IconButton(
+                                            icon: Icon(
+                                              Icons.favorite,
+                                              color: Colors.red,
+                                            ),
+                                            onPressed: () {
+                                              setState(() {
+                                                pro[s].favorite =
+                                                    !pro[s].favorite;
+                                              });
+                                            },
+                                          ),
+                                        ),
                                         Text(
                                           pro[s].name,
                                           style: TextStyle(
@@ -71,30 +84,17 @@ class _FavoritePageState extends State<FavoritePage> {
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        Row( children: [
-                                          Icon(Icons.star,color: Colors.yellow,),
-                                          Text(
-                                            pro[s].ratings .toString(),
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),]
-
-                                        ),
-
-                                        Row(mainAxisAlignment: MainAxisAlignment.end,
+                                        Row(
                                           children: [
-                                            IconButton(
-                                              icon: Icon(
-                                                Icons.favorite,
-                                                color: Colors.red,
+                                            Icon(
+                                              Icons.star,
+                                              color: Colors.yellow,
+                                            ),
+                                            Text(
+                                              pro[s].ratings.toString(),
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
                                               ),
-                                              onPressed: () {
-                                                setState(() {
-                                                  pro[s].favorite =
-                                                  !pro[s].favorite;
-                                                });
-                                              },
                                             ),
                                           ],
                                         ),
@@ -112,11 +112,9 @@ class _FavoritePageState extends State<FavoritePage> {
                 ],
               ),
             ),
-
           ],
         ),
       ),
     );
   }
 }
-

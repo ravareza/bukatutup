@@ -99,7 +99,7 @@ class _RegisterPageState extends State<RegisterPage>{
                       obscureText: false,
                       decoration: InputDecoration(
                         filled: true,
-                        hintText: "Rava reza",
+                        hintText: "Name",
                         alignLabelWithHint: true,
                         focusColor: Colors.white,
                         fillColor: Colors.white,
@@ -113,7 +113,7 @@ class _RegisterPageState extends State<RegisterPage>{
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          "Username",
+                          "Display name",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -128,7 +128,7 @@ class _RegisterPageState extends State<RegisterPage>{
                       obscureText: false,
                       decoration: InputDecoration(
                         filled: true,
-                        hintText: "Reza",
+                        hintText: "Display name",
                         alignLabelWithHint: true,
                         focusColor: Colors.white,
                         fillColor: Colors.white,
@@ -165,7 +165,7 @@ class _RegisterPageState extends State<RegisterPage>{
                           },
                           icon: Icon(_isObsercureIcon, color: Colors.black),
                         ),
-                        hintText: "12345678",
+                        hintText: "Password",
                         alignLabelWithHint: true,
                         focusColor: Colors.white,
                         fillColor: Colors.white,
@@ -202,7 +202,7 @@ class _RegisterPageState extends State<RegisterPage>{
                           },
                           icon: Icon(_sobcureIcon, color: Colors.black),
                         ),
-                        hintText: "12345678",
+                        hintText: "Confirm Password",
                         alignLabelWithHint: true,
                         focusColor: Colors.white,
                         fillColor: Colors.white,
@@ -223,7 +223,7 @@ class _RegisterPageState extends State<RegisterPage>{
                             });
                           },
                           child: Text(
-                            "Batal",
+                            "Cancel",
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
@@ -251,7 +251,7 @@ class _RegisterPageState extends State<RegisterPage>{
                             });
                           },
                           child: Text(
-                            "Daftar",
+                            "Register",
                             style: TextStyle(color: Colors.white),
                           ),
                         ),

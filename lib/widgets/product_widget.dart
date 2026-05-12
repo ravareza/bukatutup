@@ -30,10 +30,15 @@ class _ProductWidgetState extends State<ProductWidget> {
       child: Container(
         width: widget.width,
         height: widget.height,
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(5),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: [Align(alignment: Alignment.topRight,child: IconButton(
+            onPressed: widget.onfavorite,
+            icon: Icon(Icons.favorite ,
+              color: favorite ? Colors.redAccent : Colors.grey,
+            ),
+          ),),
             Image.asset(
               widget.img,
               height: 100,
@@ -41,33 +46,27 @@ class _ProductWidgetState extends State<ProductWidget> {
               fit: BoxFit.cover,
             ),
             SizedBox(height: 5),
-            Text(
-              widget.name,
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            Text(widget.price, style: TextStyle(fontSize: 14)),
-            SizedBox(height: 5),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Column(
               children: [
-                Row(
-                  children: [
-                    Icon(Icons.star, color: Colors.yellowAccent),
-                    Text(widget.ratings, style: TextStyle(fontSize: 12)),
+
+                    Text(
+                      widget.name,
+                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                    Text(widget.price, style: TextStyle(fontSize: 14)),
+                    SizedBox(height: 5),
+                    Row(
+                      children: [
+                        Icon(Icons.star, color: Colors.yellowAccent),
+                        Text(widget.ratings, style: TextStyle(fontSize: 12)),
+                      ],
+                    ),
                   ],
-                ),
-                IconButton(
-                  onPressed: widget.onfavorite,
-                  icon: Icon(Icons.favorite ,
-                    color: favorite ? Colors.redAccent : Colors.grey,
-                  ),
                 ),
               ],
             ),
-          ],
         ),
-      ),
     );
   }
 }
