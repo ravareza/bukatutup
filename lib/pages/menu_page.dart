@@ -25,25 +25,25 @@ class _MenuPageState extends State<MenuPage> {
         page: const HomePage(),
         icon: Icons.home,
         label: "Home",
-        color: Colors.purpleAccent,
+        color: Colors.deepPurpleAccent,
       ),
       1: MenuModel(
         label: "Favorite",
         icon: Icons.favorite,
-        color: Colors.purpleAccent,
+        color: Colors.deepPurpleAccent,
         page: const FavoritePage(),
       ),
       2: MenuModel(
         label: "Cart",
         icon: Icons.shopping_cart,
-        color: Colors.purpleAccent,
+        color: Colors.deepPurpleAccent,
         page: const ChartPage(),
       ),
       3: MenuModel(
         label: "Profile",
         page: const ProfilePage(),
         icon: Icons.person,
-        color: Colors.purpleAccent,
+        color: Colors.deepPurpleAccent,
       ),
     }; // ✅ FIX: Missing closing `};` for the map — caused entire class to break
   }
@@ -59,7 +59,7 @@ class _MenuPageState extends State<MenuPage> {
               "",
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.pink,
+                color: Colors.lightBlueAccent,
               ),
             ),
           ],

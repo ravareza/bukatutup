@@ -132,28 +132,20 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Column(children: [
-                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextButton(
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ForgetPassword(),
+                Align(alignment: Alignment.centerRight,
+                  child: TextButton(
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ForgetPassword(),
+                          ),
+                        ),
+                        child: Text(
+                          "Forget Password",
+                          style: TextStyle(color: Colors.white),
                         ),
                       ),
-                      child: Text(
-                        "Forget Password",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ],
                 ),
-                ],
-              ),]),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -217,13 +209,12 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ],
                     ),
-                  ],
+                ])
                 ),
               ),
             ),
           ),
         ),
-      ),
     );
   }
 }
