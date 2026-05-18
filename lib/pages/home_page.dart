@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_uas/pages/det_product.dart';
 import 'package:project_uas/pages/detail_page.dart';
 import 'package:project_uas/services/product_list.dart';
 import 'package:project_uas/widgets/banner_header.dart';
@@ -33,17 +34,10 @@ class _HomePageState extends State<HomePage> {
                     showSearch(context: context, delegate: CustomSearch(),);
                   },
                   child: Container(
-                    padding: EdgeInsets.fromLTRB(8, 12, 8, 12),
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: [Icon(Icons.search), Text('Search')],
+                      children: [Icon(Icons.search), Text('Search'),],
                     ),
                   ),
                 ),
@@ -109,38 +103,43 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               //pruduct
-              Container(
-                width: size.width,
-                height: pro.length / 2 * 240,
-                padding: EdgeInsets.all(10),
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 0.8,
+              ElevatedButton(
+                onPressed: () {setState(() {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => DetProduct(),));
+                });},
+                child: Container(
+                  width: size.width,
+                  height: pro.length / 2 * 240,
+                  padding: EdgeInsets.all(10),
+                  child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      childAspectRatio: 0.8,
+                    ),
+                    itemCount: nonFavorite.length,
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (context, s) {
+                      final realIn = pro.indexOf(nonFavorite[s]);
+                      return ProductWidget(
+                        key: ValueKey(nonFavorite[s].id),
+                        name: nonFavorite[s].name,
+                        price: nonFavorite[s].price.toString(),
+                        ratings: nonFavorite[s].ratings.toString(),
+                        img: nonFavorite[s].img,
+                        onfavorite: () {
+                          setState(() {
+                            nonFavorite[s].favorite = true;
+                          });
+                        },
+                        width: size.width / 2,
+                        height: 200, isfavorite: nonFavorite[s].favorite,
+                      );
+                    }
                   ),
-                  itemCount: nonFavorite.length,
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, s) {
-                    final realIn = pro.indexOf(nonFavorite[s]);
-                    return ProductWidget(
-                      key: ValueKey(nonFavorite[s].id),
-                      name: nonFavorite[s].name,
-                      price: nonFavorite[s].price.toString(),
-                      ratings: nonFavorite[s].ratings.toString(),
-                      img: nonFavorite[s].img,
-                      onfavorite: () {
-                        setState(() {
-                          nonFavorite[s].favorite = true;
-                        });
-                      },
-                      width: size.width / 2,
-                      height: 200, isfavorite: nonFavorite[s].favorite,
-                    );
-                  }
                 ),
               ),
             ],
