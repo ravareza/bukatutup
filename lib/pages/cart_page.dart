@@ -10,6 +10,9 @@ class ChartPage extends StatefulWidget {
 class _ChartPageState extends State<ChartPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(title: Text("cart")),
+      body: Center(child: Text("Coming Soon")),
+    );
   }
 }

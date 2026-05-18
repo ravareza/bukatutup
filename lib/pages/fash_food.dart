@@ -10,6 +10,9 @@ class FashFood extends StatefulWidget {
 class _FashFoodState extends State<FashFood> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(title: Text("Fashfood")),
+      body: Center(child: Text("Coming Soon")),
+    );
   }
 }

@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    var nonFavorite = pro;
+    var nonFavorite = pro.where((p) => p.favorite == false,).toList();
     var size = MediaQuery.of(context).size;
     return Scaffold(
       body: SizedBox(
@@ -25,9 +25,13 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              //search
               Padding(
                 padding: const EdgeInsets.all(16),
-                child: GestureDetector(
+                child: ElevatedButton(
+                  onPressed: () {
+                    showSearch(context: context, delegate: CustomSearch(),);
+                  },
                   child: Container(
                     padding: EdgeInsets.fromLTRB(8, 12, 8, 12),
                     height: 50,
@@ -44,11 +48,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-
               //categories
               Container(
                 width: size.width,
-                height: 300,
+                height: 100,
                 padding: EdgeInsets.all(10),
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -82,7 +85,7 @@ class _HomePageState extends State<HomePage> {
               //banners (carousel)
               SizedBox(
                 width: size.width,
-                height: 150,
+                height: 180,
                 child: PageView(
                   allowImplicitScrolling: true,
                   scrollDirection: Axis.horizontal,
@@ -117,29 +120,92 @@ class _HomePageState extends State<HomePage> {
                     mainAxisSpacing: 10,
                     childAspectRatio: 0.8,
                   ),
-                  itemCount: pro.length,
+                  itemCount: nonFavorite.length,
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
-                  itemBuilder: (context, s) => ProductWidget(
-                    name: nonFavorite[s].name,
-                    price: nonFavorite[s].price.toString(),
-                    ratings: nonFavorite[s].ratings.toString(),
-                    img: nonFavorite[s].img,
-                    onfavorite: () {
-                      setState(() {
-                        pro[s].favorite =
-                        !pro[s].favorite;
-                      });
-                    },
-                    width: size.width / 2,
-                    height: 200,
-                  ),
+                  itemBuilder: (context, s) {
+                    final realIn = pro.indexOf(nonFavorite[s]);
+                    return ProductWidget(
+                      key: ValueKey(nonFavorite[s].id),
+                      name: nonFavorite[s].name,
+                      price: nonFavorite[s].price.toString(),
+                      ratings: nonFavorite[s].ratings.toString(),
+                      img: nonFavorite[s].img,
+                      onfavorite: () {
+                        setState(() {
+                          nonFavorite[s].favorite = true;
+                        });
+                      },
+                      width: size.width / 2,
+                      height: 200, isfavorite: nonFavorite[s].favorite,
+                    );
+                  }
                 ),
-              ),],
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 }
+//search
+class CustomSearch extends SearchDelegate {
+  List<String> searchTerm = [
+    'Sepatu',
+    'Baju',
+    'Milk tea',
+    'Asus',
+    'Ayam bakar',
+    'Milk tea'
+  ];
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return[
+      IconButton(onPressed: () {
+        query = '';
+      }, icon: Icon(Icons.clear))
+    ];
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return
+      IconButton(onPressed: () {
+        close(context, null);
+      }, icon: Icon(Icons.arrow_back));
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    List<String> match = [];
+    for (var prod in searchTerm){
+      if (prod.toLowerCase().contains(query.toLowerCase())){
+        match.add(prod);
+      }
+    }
+    return ListView.builder(itemCount: match.length,itemBuilder: (context, s) {
+      var result = match[s];
+      return ListTile(
+        title: Text(result),
+      );
+    },);
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<String> match = [];
+    for (var prod in searchTerm){
+      if (prod.toLowerCase().contains(query.toLowerCase())){
+        match.add(prod);
+      }
+    }
+    return ListView.builder(itemCount: match.length,itemBuilder: (context, s) {
+      var result = match[s];
+      return ListTile(
+        title: Text(result),
+      );
+    },);
+  }
+  }
