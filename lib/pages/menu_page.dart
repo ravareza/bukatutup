@@ -72,9 +72,31 @@ class _MenuPageState extends State<MenuPage> {
               onTap: () {Navigator.pop(context);
               },
             ),
+          SizedBox(width: 15),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text("Home"),
+            onTap: () {Navigator.pop(context);
+            setState(() => selected = 0);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.favorite),
+            title: Text("favorite"),
+            onTap: () {Navigator.pop(context);
+            setState(() => selected = 1);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.shopping_cart),
+            title: Text("Cart"),
+            onTap: () {Navigator.pop(context);
+            setState(() => selected = 2);
+            },
+          ),
 
             ListTile(
-              leading: Icon(Icons.person_outline),
+              leading: Icon(Icons.person),
               title: Text("Profile"),
               onTap: () {Navigator.pop(context);
                 setState(() => selected = 3);
