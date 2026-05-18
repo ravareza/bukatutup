@@ -167,7 +167,7 @@ class _LoginPageState extends State<LoginPage> {
                             });
                           },
                           child: Text(
-                            "Daftar",
+                            "Register",
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
@@ -179,28 +179,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           onPressed: () {
-                            setState(() {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MenuPage(),
-                                ),
-                              );
-                              if (_username.text == "Rava" &&
-                                  _password.text == "Reza") {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) =>
-                                      AlertDialog(title: Text("Login Sukses")),
-                                );
-                              } else {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) =>
-                                      AlertDialog(title: Text("Login Gagal")),
-                                );
-                              }
-                            });
+                            _cekLoginn(context, _username.text.toString(), _password.text.toString());
                           },
                           child: Text(
                             "Login",
@@ -216,5 +195,24 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
     );
+  }
+
+  void _cekLoginn(BuildContext context, username, password) {
+    if (username == "Rava" && password == "Reza") {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MenuPage(),
+        ),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) =>
+            AlertDialog(title: Text("Login Gagal")),
+      );
+    }
+    setState(() {
+    });
   }
 }
