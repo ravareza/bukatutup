@@ -11,9 +11,8 @@ class _FashFoodState extends State<FashFood> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("FastFood", style: TextStyle(fontWeight: FontWeight.bold)),
-      ),
+      appBar: AppBar(title: Text("Fashfood")),
+      body: Center(child: Text("Coming Soon")),
     );
   }
 }

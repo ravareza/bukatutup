@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project_uas/pages/forget_password.dart';
 import 'package:project_uas/pages/menu_page.dart';
 import 'package:project_uas/pages/register_page.dart';
 
@@ -132,20 +131,6 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     SizedBox(height: 20),
-                Align(alignment: Alignment.centerRight,
-                  child: TextButton(
-                        onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ForgetPassword(),
-                          ),
-                        ),
-                        child: Text(
-                          "Forget Password",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

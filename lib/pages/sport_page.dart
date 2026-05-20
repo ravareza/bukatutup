@@ -10,6 +10,9 @@ class SportPage extends StatefulWidget {
 class _SportPageState extends State<SportPage> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(appBar: AppBar(title: Text("Sports"),),);
+    return Scaffold(
+      appBar: AppBar(title: Text("Sport")),
+      body: Center(child: Text("Coming Soon")),
+    );
   }
 }

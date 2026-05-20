@@ -5,6 +5,7 @@ class ProductWidget extends StatefulWidget {
   final String price;
   final String ratings;
   final String img;
+  final bool isfavorite;
   final VoidCallback onfavorite;
   final double width, height;
   const ProductWidget({
@@ -15,14 +16,13 @@ class ProductWidget extends StatefulWidget {
     required this.img,
     required this.onfavorite,
     required this.width,
-    required this.height,
+    required this.height, required this.isfavorite,
   });
   @override
   State<ProductWidget> createState() => _ProductWidgetState();
 }
 
 class _ProductWidgetState extends State<ProductWidget> {
-  bool favorite = false;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -36,7 +36,7 @@ class _ProductWidgetState extends State<ProductWidget> {
           children: [Align(alignment: Alignment.topRight,child: IconButton(
             onPressed: widget.onfavorite,
             icon: Icon(Icons.favorite ,
-              color: favorite ? Colors.redAccent : Colors.grey,
+              color: widget.isfavorite ? Colors.redAccent : Colors.grey,
             ),
           ),),
             Image.asset(
