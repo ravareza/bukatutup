@@ -10,6 +10,6 @@ class FashionPage extends StatefulWidget {
 class _FashionPageState extends State<FashionPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(appBar: AppBar(title: Text("Fashion",style: TextStyle(fontWeight: FontWeight.bold),),),);
   }
 }

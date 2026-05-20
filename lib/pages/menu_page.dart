@@ -110,7 +110,7 @@ class _MenuPageState extends State<MenuPage> {
             ),
             ListTile(
               leading: Icon(Icons.location_on_outlined),
-              title: Text("Alamat"),
+              title: Text("address"),
               onTap: () {Navigator.pop(context);
               },
             ),
@@ -120,6 +120,12 @@ class _MenuPageState extends State<MenuPage> {
               onTap: () {Navigator.pop(context);
               },
             ),
+          ListTile(
+            leading: Icon(Icons.logout_outlined),
+            title: Text("LogOut"),
+            onTap: () {Navigator.pop(context);
+            },
+          ),
           ],
         ),
       ),
