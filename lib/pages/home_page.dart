@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_uas/models/product_model.dart';
 import 'package:project_uas/pages/det_product.dart';
 import 'package:project_uas/pages/detail_page.dart';
 import 'package:project_uas/services/product_list.dart';
@@ -17,7 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    var nonFavorite = pro.where((p) => p.favorite == false,).toList();
+    var nonFavorite = pro.where((p) => p.favorite == false).toList();
     var size = MediaQuery.of(context).size;
     return Scaffold(
       body: SizedBox(
@@ -27,21 +28,20 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               //search
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: ElevatedButton(
-                  onPressed: () {
-                    showSearch(context: context, delegate: CustomSearch(),);
-                  },
-                  child: Container(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [Icon(Icons.search), Text('Search'),],
-                    ),
-                  ),
+
+              GestureDetector(
+                onTap: () => showSearch(context: context, delegate: CustomSearch()),
+                child: SearchBar(leading: Icon(Icons.search),
+                  hintText: "Search",
+                  backgroundColor: WidgetStatePropertyAll(Colors.white),
+                  padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 16.0)),
+                  shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(30.0))),
+                  elevation: WidgetStatePropertyAll(10.0),
+                  onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
                 ),
               ),
+
+            
               //categories
               Container(
                 width: size.width,
@@ -103,10 +103,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               //pruduct
-              ElevatedButton(
-                onPressed: () {setState(() {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => DetProduct(),));
-                });},
+              GestureDetector(
                 child: Container(
                   width: size.width,
                   height: pro.length / 2 * 240,
@@ -123,8 +120,15 @@ class _HomePageState extends State<HomePage> {
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     itemBuilder: (context, s) {
-                      final realIn = pro.indexOf(nonFavorite[s]);
                       return ProductWidget(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetProduct(id: pro[s].id),
+                            ),
+                          );
+                        },
                         key: ValueKey(nonFavorite[s].id),
                         name: nonFavorite[s].name,
                         price: nonFavorite[s].price.toString(),
@@ -136,9 +140,10 @@ class _HomePageState extends State<HomePage> {
                           });
                         },
                         width: size.width / 2,
-                        height: 200, isfavorite: nonFavorite[s].favorite,
+                        height: 200,
+                        isfavorite: nonFavorite[s].favorite,
                       );
-                    }
+                    },
                   ),
                 ),
               ),
@@ -149,62 +154,69 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-//search
+
+//search vga tau jadi ngaknya
 class CustomSearch extends SearchDelegate {
   List<String> searchTerm = [
     'Sepatu',
     'Baju',
-    'Milk tea',
-    'Asus',
+    'Laptop',
     'Ayam bakar',
-    'Milk tea'
+    'Minuman',
   ];
   @override
   List<Widget>? buildActions(BuildContext context) {
-    return[
-      IconButton(onPressed: () {
-        query = '';
-      }, icon: Icon(Icons.clear))
+    return [
+      IconButton(
+        onPressed: () {
+          query = '';
+        },
+        icon: Icon(Icons.clear),
+      ),
     ];
   }
 
   @override
   Widget? buildLeading(BuildContext context) {
-    return
-      IconButton(onPressed: () {
+    return IconButton(
+      onPressed: () {
         close(context, null);
-      }, icon: Icon(Icons.arrow_back));
+      },
+      icon: Icon(Icons.arrow_back),
+    );
   }
 
   @override
   Widget buildResults(BuildContext context) {
     List<String> match = [];
-    for (var prod in searchTerm){
-      if (prod.toLowerCase().contains(query.toLowerCase())){
+    for (var prod in searchTerm) {
+      if (prod.toLowerCase().contains(query.toLowerCase())) {
         match.add(prod);
       }
     }
-    return ListView.builder(itemCount: match.length,itemBuilder: (context, s) {
-      var result = match[s];
-      return ListTile(
-        title: Text(result),
-      );
-    },);
+    return ListView.builder(
+      itemCount: match.length,
+      itemBuilder: (context, s) {
+        var result = match[s];
+        return ListTile(title: Text(result));
+      },
+    );
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
     List<String> match = [];
-    for (var prod in searchTerm){
-      if (prod.toLowerCase().contains(query.toLowerCase())){
+    for (var prod in searchTerm) {
+      if (prod.toLowerCase().contains(query.toLowerCase())) {
         match.add(prod);
       }
     }
-    return ListView.builder(itemCount: match.length,itemBuilder: (context, s) {
-      var result = match[s];
-      return ListTile(
-        title: Text(result),
-      );
-    },);
+    return ListView.builder(
+      itemCount: match.length,
+      itemBuilder: (context, s) {
+        var result = match[s];
+        return ListTile(title: Text(result));
+      },
+    );
   }
-  }
+}
