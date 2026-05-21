@@ -25,7 +25,7 @@ class _MenuPageState extends State<MenuPage> {
       ),
       1: MenuModel(label: "Favorite", icon: Icons.favorite, color: Colors.blue, page: FavoritePage(),
       ),
-      2: MenuModel(label: "Cart", icon: Icons.shopping_cart, color: Colors.blue, page: ChartPage(),
+      2: MenuModel(label: "Cart", icon: Icons.shopping_cart, color: Colors.blue, page: CartPage(),
       ),
       3: MenuModel(label: "Profile", page: ProfilePage(), icon: Icons.person, color: Colors.blue,
       ),
