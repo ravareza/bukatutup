@@ -11,32 +11,71 @@ class DetProduct extends StatefulWidget {
 }
 
 class _DetProductState extends State<DetProduct> {
-late ProductModel product;
+  late ProductModel product;
   @override
   void initState() {
-    final product = pro.firstWhere((element) => element.id == widget.id,);
+    product = pro.firstWhere((element) => element.id == widget.id);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
-          appBar: AppBar(
-            flexibleSpace: Container(decoration: BoxDecoration(color: Colors.lightBlueAccent
-            ),),
-          ),body: Column(
-          children: [Container(
-    width: double.infinity,
-    height: 150,
-    alignment: Alignment.center,
-    decoration: BoxDecoration(
-    image: DecorationImage(
-    image: AssetImage(product.img),
-    fit: BoxFit.fill,)
-
-    )
-    ),
-        ]),
+      appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(color: Colors.lightBlueAccent),
+        ),
+      ),
+      body: Column(
+        children: [
+          Container(
+            width: size.width - 15,
+            height: 330,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(product.img),
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+          Card(
+            color: Colors.white,
+            child: Text(product.desk, style: TextStyle(fontSize: 20)),
+          ),
+          Card(
+            child: Row(
+              children: [
+                Icon(Icons.star, color: Colors.yellow, size: 20),
+                Text(
+                  product.ratings.toString(),
+                  style: TextStyle(fontSize: 20),
+                ),
+                SizedBox(width: 280),
+                Text(product.price, style: TextStyle(fontSize: 20)),
+              ],
+            ),
+          ),
+          SizedBox(height: 400),
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                product.chart = !product.chart;
+              });
+            },
+            child: Center(
+              child: Row(
+                children: [
+                  Icon(Icons.shopping_cart),
+                  SizedBox(width: 5),
+                  Text("Add to card"),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

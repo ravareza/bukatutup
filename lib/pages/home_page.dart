@@ -28,7 +28,6 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               //search
-
               GestureDetector(
                 onTap: () => showSearch(context: context, delegate: CustomSearch()),
                 child: SearchBar(leading: Icon(Icons.search),
@@ -41,7 +40,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
-            
+
               //categories
               Container(
                 width: size.width,
@@ -155,7 +154,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-//search vga tau jadi ngaknya
+//search ga tau jadi ngaknya
 class CustomSearch extends SearchDelegate {
   List<String> searchTerm = [
     'Sepatu',

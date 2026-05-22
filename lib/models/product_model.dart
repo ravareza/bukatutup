@@ -5,6 +5,7 @@ class ProductModel {
   final String price;
   final double ratings;
   bool favorite = false;
+  bool chart = false;
   final String img;
   final String desk;
   final int id;
@@ -14,6 +15,7 @@ class ProductModel {
     required this.price,
     required this.ratings,
     required this.favorite,
+    required this.chart,
     required this.img, required this.desk, required this.id,
   });
 }
