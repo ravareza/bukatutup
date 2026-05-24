@@ -21,29 +21,13 @@ class _MenuPageState extends State<MenuPage> {
   void initState() {
     super.initState();
     apa = {
-      0: MenuModel(
-        page: const HomePage(),
-        icon: Icons.home,
-        label: "Home",
-        color: Colors.blue,
+      0: MenuModel(page: HomePage(), icon: Icons.home, label: "Home", color: Colors.blue,
       ),
-      1: MenuModel(
-        label: "Favorite",
-        icon: Icons.favorite,
-        color: Colors.blue,
-        page: const FavoritePage(),
+      1: MenuModel(label: "Favorite", icon: Icons.favorite, color: Colors.blue, page: FavoritePage(),
       ),
-      2: MenuModel(
-        label: "Cart",
-        icon: Icons.shopping_cart,
-        color: Colors.blue,
-        page: const ChartPage(),
+      2: MenuModel(label: "Cart", icon: Icons.shopping_cart, color: Colors.blue, page: CartPage(),
       ),
-      3: MenuModel(
-        label: "Profile",
-        page: const ProfilePage(),
-        icon: Icons.person,
-        color: Colors.blue,
+      3: MenuModel(label: "Profile", page: ProfilePage(), icon: Icons.person, color: Colors.blue,
       ),
     };
   }
@@ -57,7 +41,7 @@ class _MenuPageState extends State<MenuPage> {
           children: [
             Text(
               "",
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.lightBlueAccent,
               ),
@@ -65,79 +49,84 @@ class _MenuPageState extends State<MenuPage> {
           ],
         ),
         flexibleSpace: Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             gradient: LinearGradient(colors: [Colors.blue, Colors.blueAccent]),
           ),
         ),
       ),
       drawer: Drawer(
-        child: Container(
-          padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(Icons.arrow_back_ios_new),
-                  ),
-                ],
+        child: Column(children: [
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.zero,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [Colors.blue, Colors.blueAccent],
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Profile",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Settings",
-                      style: TextStyle(color: Colors.black),
-                    ),
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start),
+            ),
 
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Alamat",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Pesanan",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+            ListTile(
+              leading: Icon(Icons.arrow_back_ios_new),
+              title: Text("Back"),
+              onTap: () {Navigator.pop(context);
+              },
+            ),
+          SizedBox(width: 15),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text("Home"),
+            onTap: () {Navigator.pop(context);
+            setState(() => selected = 0);
+            },
           ),
+          ListTile(
+            leading: Icon(Icons.favorite),
+            title: Text("favorite"),
+            onTap: () {Navigator.pop(context);
+            setState(() => selected = 1);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.shopping_cart),
+            title: Text("Cart"),
+            onTap: () {Navigator.pop(context);
+            setState(() => selected = 2);
+            },
+          ),
+
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text("Profile"),
+              onTap: () {Navigator.pop(context);
+                setState(() => selected = 3);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings_outlined),
+              title: Text("Settings"),
+              onTap: () {Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.location_on_outlined),
+              title: Text("address"),
+              onTap: () {Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.receipt_long_outlined),
+              title: Text("Pesanan"),
+              onTap: () {Navigator.pop(context);
+              },
+            ),
+          ListTile(
+            leading: Icon(Icons.logout_outlined),
+            title: Text("LogOut"),
+            onTap: () {Navigator.pop(context);
+            },
+          ),
+          ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
