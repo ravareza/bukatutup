@@ -235,7 +235,8 @@ class _RegisterPageState extends State<RegisterPage>{
                               if (_confirmpassword.text == _password.text &&
                                   _username.text.isNotEmpty &&
                                   _password.text.isNotEmpty &&
-                                  _nama.text.isNotEmpty) {
+                                  _nama.text.isNotEmpty
+                              ) {
                                 showDialog(
                                   context: context,
                                   builder: (context) =>

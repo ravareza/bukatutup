@@ -21,13 +21,29 @@ class _MenuPageState extends State<MenuPage> {
   void initState() {
     super.initState();
     apa = {
-      0: MenuModel(page: HomePage(), icon: Icons.home, label: "Home", color: Colors.blue,
+      0: MenuModel(
+        page: HomePage(),
+        icon: Icons.home,
+        label: "Home",
+        color: Colors.blue,
       ),
-      1: MenuModel(label: "Favorite", icon: Icons.favorite, color: Colors.blue, page: FavoritePage(),
+      1: MenuModel(
+        label: "Favorite",
+        icon: Icons.favorite,
+        color: Colors.blue,
+        page: FavoritePage(),
       ),
-      2: MenuModel(label: "Cart", icon: Icons.shopping_cart, color: Colors.blue, page: CartPage(),
+      2: MenuModel(
+        label: "Cart",
+        icon: Icons.shopping_cart,
+        color: Colors.blue,
+        page: ChartPage(),
       ),
-      3: MenuModel(label: "Profile", page: ProfilePage(), icon: Icons.person, color: Colors.blue,
+      3: MenuModel(
+        label: "Profile",
+        page: ProfilePage(),
+        icon: Icons.person,
+        color: Colors.blue,
       ),
     };
   }
@@ -55,12 +71,14 @@ class _MenuPageState extends State<MenuPage> {
         ),
       ),
       drawer: Drawer(
-        child: Column(children: [
+        child: Column(
+          children: [
             Container(
               width: double.infinity,
               padding: EdgeInsets.zero,
               decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [Colors.blue, Colors.blueAccent],
+                gradient: LinearGradient(
+                  colors: [Colors.blue, Colors.blueAccent],
                 ),
               ),
               child: Column(crossAxisAlignment: CrossAxisAlignment.start),
@@ -69,63 +87,72 @@ class _MenuPageState extends State<MenuPage> {
             ListTile(
               leading: Icon(Icons.arrow_back_ios_new),
               title: Text("Back"),
-              onTap: () {Navigator.pop(context);
+              onTap: () {
+                Navigator.pop(context);
               },
             ),
-          SizedBox(width: 15),
-          ListTile(
-            leading: Icon(Icons.home),
-            title: Text("Home"),
-            onTap: () {Navigator.pop(context);
-            setState(() => selected = 0);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.favorite),
-            title: Text("favorite"),
-            onTap: () {Navigator.pop(context);
-            setState(() => selected = 1);
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.shopping_cart),
-            title: Text("Cart"),
-            onTap: () {Navigator.pop(context);
-            setState(() => selected = 2);
-            },
-          ),
+            SizedBox(width: 15),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text("Home"),
+              onTap: () {
+                Navigator.pop(context);
+                setState(() => selected = 0);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.favorite),
+              title: Text("favorite"),
+              onTap: () {
+                Navigator.pop(context);
+                setState(() => selected = 1);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.shopping_cart),
+              title: Text("Cart"),
+              onTap: () {
+                Navigator.pop(context);
+                setState(() => selected = 2);
+              },
+            ),
 
             ListTile(
               leading: Icon(Icons.person),
               title: Text("Profile"),
-              onTap: () {Navigator.pop(context);
+              onTap: () {
+                Navigator.pop(context);
                 setState(() => selected = 3);
               },
             ),
             ListTile(
               leading: Icon(Icons.settings_outlined),
               title: Text("Settings"),
-              onTap: () {Navigator.pop(context);
+              onTap: () {
+                Navigator.pop(context);
               },
             ),
             ListTile(
               leading: Icon(Icons.location_on_outlined),
               title: Text("address"),
-              onTap: () {Navigator.pop(context);
+              onTap: () {
+                Navigator.pop(context);
               },
             ),
             ListTile(
               leading: Icon(Icons.receipt_long_outlined),
               title: Text("Pesanan"),
-              onTap: () {Navigator.pop(context);
+              onTap: () {
+                Navigator.pop(context);
               },
             ),
-          ListTile(
-            leading: Icon(Icons.logout_outlined),
-            title: Text("LogOut"),
-            onTap: () {Navigator.pop(context);
-            },
-          ),
+            ListTile(
+              leading: Icon(Icons.logout_outlined),
+              title: Text("LogOut"),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
           ],
         ),
       ),

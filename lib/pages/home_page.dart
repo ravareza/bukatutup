@@ -27,19 +27,50 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              //search
-              GestureDetector(
-                onTap: () => showSearch(context: context, delegate: CustomSearch()),
-                child: SearchBar(leading: Icon(Icons.search),
-                  hintText: "Search",
-                  backgroundColor: WidgetStatePropertyAll(Colors.white),
-                  padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 16.0)),
-                  shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(30.0))),
-                  elevation: WidgetStatePropertyAll(10.0),
-                  onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
+              // //search
+              // SearchBar(leading: Icon(Icons.search),
+              //     hintText: "Search",
+              //     backgroundColor: WidgetStatePropertyAll(Colors.white),
+              //     padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 16.0)),
+              //     shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(30.0))),
+              //     elevation: WidgetStatePropertyAll(10.0),
+              //     onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
+              //   ),
+              SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: SearchAnchor.bar(
+                  barHintText: "Search",
+                  suggestionsBuilder:
+                      (BuildContext context, SearchController controller) {
+                        String input = controller.value.text.toLowerCase();
+                        var fillter = pro
+                            .where((s) => s.name.contains(input))
+                            .toList();
+                        return fillter.map(
+                          (pro) => ListTile(
+
+                            leading: Image.asset(
+                              pro.img,
+                              width: 50,
+                              height: 50,
+                              fit: BoxFit.cover,
+                            ),
+                            title: Text(pro.name),
+                            subtitle: Text("Rp ${pro.price}"),
+                            onTap: () {
+                              controller.closeView(pro.name);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetProduct(id: pro.id),
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
                 ),
               ),
-
 
               //categories
               Container(
@@ -150,72 +181,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-    );
-  }
-}
-
-//search ga tau jadi ngaknya
-class CustomSearch extends SearchDelegate {
-  List<String> searchTerm = [
-    'Sepatu',
-    'Baju',
-    'Laptop',
-    'Ayam bakar',
-    'Minuman',
-  ];
-  @override
-  List<Widget>? buildActions(BuildContext context) {
-    return [
-      IconButton(
-        onPressed: () {
-          query = '';
-        },
-        icon: Icon(Icons.clear),
-      ),
-    ];
-  }
-
-  @override
-  Widget? buildLeading(BuildContext context) {
-    return IconButton(
-      onPressed: () {
-        close(context, null);
-      },
-      icon: Icon(Icons.arrow_back),
-    );
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    List<String> match = [];
-    for (var prod in searchTerm) {
-      if (prod.toLowerCase().contains(query.toLowerCase())) {
-        match.add(prod);
-      }
-    }
-    return ListView.builder(
-      itemCount: match.length,
-      itemBuilder: (context, s) {
-        var result = match[s];
-        return ListTile(title: Text(result));
-      },
-    );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    List<String> match = [];
-    for (var prod in searchTerm) {
-      if (prod.toLowerCase().contains(query.toLowerCase())) {
-        match.add(prod);
-      }
-    }
-    return ListView.builder(
-      itemCount: match.length,
-      itemBuilder: (context, s) {
-        var result = match[s];
-        return ListTile(title: Text(result));
-      },
     );
   }
 }
