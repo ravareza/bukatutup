@@ -183,7 +183,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _cekLoginn(BuildContext context, username, password) {
-    if (username == "Rava" && password == "Reza") {
+    if (username == "Rava" && password == "Lucky") {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(

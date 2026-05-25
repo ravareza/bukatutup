@@ -59,17 +59,18 @@ class _DetProductState extends State<DetProduct> {
           ),
           SizedBox(height: 400),
           ElevatedButton(
+            style: ButtonStyle(fixedSize: WidgetStatePropertyAll(Size(size.width - 20, 40),),backgroundColor: WidgetStatePropertyAll( Colors.green,)),
             onPressed: () {
               setState(() {
                 product.chart = !product.chart;
               });
             },
             child: Center(
-              child: Row(
+              child: Row(mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.shopping_cart),
+                  Icon(Icons.shopping_cart,color: Colors.white,),
                   SizedBox(width: 5),
-                  Text("Add to card"),
+                  Text("Add to card",style: TextStyle(color: Colors.white),),
                 ],
               ),
             ),

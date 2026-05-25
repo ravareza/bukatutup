@@ -12,6 +12,7 @@ class ChartPage extends StatefulWidget {
 class _ChartPageState extends State<ChartPage> {
   @override
   Widget build(BuildContext context) {
+    bool remember = true;
     var size = MediaQuery.of(context).size;
     var unchart = pro.where((element) => element.chart == true).toList();
     return Scaffold(
@@ -29,7 +30,7 @@ class _ChartPageState extends State<ChartPage> {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [Card(child: Text("Chart"))],
+                      children: [Card(child: Text("Chart"),)],
                     ),
                     SizedBox(
                       width: size.width - 60,
@@ -46,6 +47,14 @@ class _ChartPageState extends State<ChartPage> {
                                 padding: const EdgeInsets.all(8),
                                 child: Row(
                                   children: [
+                                    Checkbox(
+                                      value: remember,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          remember = !remember;
+                                        });
+                                      },
+                                    ),
                                     Image.asset(
                                       unchart[s].img,
                                       width: 80,
@@ -84,7 +93,6 @@ class _ChartPageState extends State<ChartPage> {
                                               ),
                                             ],
                                           ),
-
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.end,
@@ -99,7 +107,7 @@ class _ChartPageState extends State<ChartPage> {
                                                 },
                                                 child: Icon(
                                                   Icons.shopping_cart,
-                                                  color: Colors.yellow,
+                                                  color: Colors.green,
                                                 ),
                                               ),
                                             ],

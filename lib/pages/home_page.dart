@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_uas/models/product_model.dart';
 import 'package:project_uas/pages/det_product.dart';
-import 'package:project_uas/pages/detail_page.dart';
 import 'package:project_uas/services/product_list.dart';
 import 'package:project_uas/widgets/banner_header.dart';
 import 'package:project_uas/widgets/product_widget.dart';
@@ -27,15 +26,7 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // //search
-              // SearchBar(leading: Icon(Icons.search),
-              //     hintText: "Search",
-              //     backgroundColor: WidgetStatePropertyAll(Colors.white),
-              //     padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 16.0)),
-              //     shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(30.0))),
-              //     elevation: WidgetStatePropertyAll(10.0),
-              //     onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
-              //   ),
+              //searcbar
               SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: SearchAnchor.bar(
@@ -44,11 +35,10 @@ class _HomePageState extends State<HomePage> {
                       (BuildContext context, SearchController controller) {
                         String input = controller.value.text.toLowerCase();
                         var fillter = pro
-                            .where((s) => s.name.contains(input))
+                            .where((s) => s.name.toLowerCase().contains(input))
                             .toList();
                         return fillter.map(
                           (pro) => ListTile(
-
                             leading: Image.asset(
                               pro.img,
                               width: 50,
@@ -114,22 +104,25 @@ class _HomePageState extends State<HomePage> {
                   allowImplicitScrolling: true,
                   scrollDirection: Axis.horizontal,
                   children: [
-                    BannerHeader(
-                      imageAsset: "aset/awa/bug.png",
-                      title: "belanja 100 juta",
-                      subtitle: "diskon 50%",
-                    ),
-                    BannerHeader(
-                      imageAsset: "aset/awa/promo1.jpg",
-                      title: "",
-                      subtitle: "",
-                    ),
-                    BannerHeader(
-                      imageAsset: "aset/awa/code.png",
-                      title: "",
-                      subtitle: "#100peng",
-                    ),
-                  ],
+
+                  ]
+                    //[
+                  //   BannerHeader(
+                  //     imageAsset: "aset/awa/bug.png",
+                  //     title: "belanja 100 juta",
+                  //     subtitle: "diskon 50%",
+                  //   ),
+                  //   BannerHeader(
+                  //     imageAsset: "aset/awa/promo1.jpg",
+                  //     title: "",
+                  //     subtitle: "",
+                  //   ),
+                  //   BannerHeader(
+                  //     imageAsset: "aset/awa/code.png",
+                  //     title: "",
+                  //     subtitle: "#100peng",
+                  //   ),
+                  // ],
                 ),
               ),
               //pruduct
