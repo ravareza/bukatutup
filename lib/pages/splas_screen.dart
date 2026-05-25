@@ -48,7 +48,7 @@ class _SplasScreenState extends State<SplasScreen> {
               left: 0,
               right: 0,
               top: 325,
-              child: Image.asset("aset/awa/logg.png", width: 520, height: 520),
+              child: Image.asset("assets/awa/logg.png", width: 520, height: 520),
             ),
           ],
         ),

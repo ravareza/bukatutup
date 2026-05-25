@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_uas/models/product_model.dart';
 import 'package:project_uas/pages/det_product.dart';
+import 'package:project_uas/services/banner_service.dart';
 import 'package:project_uas/services/product_list.dart';
 import 'package:project_uas/widgets/banner_header.dart';
 import 'package:project_uas/widgets/product_widget.dart';
@@ -103,9 +104,7 @@ class _HomePageState extends State<HomePage> {
                 child: PageView(
                   allowImplicitScrolling: true,
                   scrollDirection: Axis.horizontal,
-                  children: [
-
-                  ]
+                  children: List.generate(banner.length, (index) => BannerHeader(imageAsset: banner[index].imageAsset),)
                     //[
                   //   BannerHeader(
                   //     imageAsset: "aset/awa/bug.png",
