@@ -28,45 +28,11 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               //searcbar
-              SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: SearchAnchor.bar(
-                  barHintText: "Search",
-                  suggestionsBuilder:
-                      (BuildContext context, SearchController controller) {
-                        String input = controller.value.text.toLowerCase();
-                        var fillter = pro
-                            .where((s) => s.name.toLowerCase().contains(input))
-                            .toList();
-                        return fillter.map(
-                          (pro) => ListTile(
-                            leading: Image.asset(
-                              pro.img,
-                              width: 50,
-                              height: 50,
-                              fit: BoxFit.cover,
-                            ),
-                            title: Text(pro.name),
-                            subtitle: Text("Rp ${pro.price}"),
-                            onTap: () {
-                              controller.closeView(pro.name);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => DetProduct(id: pro.id),
-                                ),
-                              );
-                            },
-                          ),
-                        );
-                      },
-                ),
-              ),
 
               //categories
               Container(
                 width: size.width,
-                height: 100,
+                height: 110,
                 padding: EdgeInsets.all(10),
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -100,28 +66,11 @@ class _HomePageState extends State<HomePage> {
               //banners (carousel)
               SizedBox(
                 width: size.width,
-                height: 180,
+                height: 200,
                 child: PageView(
                   allowImplicitScrolling: true,
                   scrollDirection: Axis.horizontal,
                   children: List.generate(banner.length, (index) => BannerHeader(imageAsset: banner[index].imageAsset),)
-                    //[
-                  //   BannerHeader(
-                  //     imageAsset: "aset/awa/bug.png",
-                  //     title: "belanja 100 juta",
-                  //     subtitle: "diskon 50%",
-                  //   ),
-                  //   BannerHeader(
-                  //     imageAsset: "aset/awa/promo1.jpg",
-                  //     title: "",
-                  //     subtitle: "",
-                  //   ),
-                  //   BannerHeader(
-                  //     imageAsset: "aset/awa/code.png",
-                  //     title: "",
-                  //     subtitle: "#100peng",
-                  //   ),
-                  // ],
                 ),
               ),
               //pruduct

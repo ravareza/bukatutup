@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:project_uas/models/menu_model.dart';
+import 'package:project_uas/pages/login_page.dart';
 import 'package:project_uas/pages/profile_page.dart';
-import 'package:project_uas/pages/settings_page.dart';
-import 'package:project_uas/pages/splas_screen.dart';
+import '../services/product_list.dart';
 import 'cart_page.dart';
+import 'det_product.dart';
 import 'favorite_page.dart';
 import 'home_page.dart';
 
@@ -16,6 +17,7 @@ class MenuPage extends StatefulWidget {
 
 class _MenuPageState extends State<MenuPage> {
   int selected = 0;
+
   late final Map<int, MenuModel> apa;
 
   @override
@@ -56,6 +58,41 @@ class _MenuPageState extends State<MenuPage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: SearchAnchor.bar(
+
+                barHintText: "Search",
+                suggestionsBuilder:
+                    (BuildContext context, SearchController controller) {
+                  String input = controller.value.text.toLowerCase();
+                  var fillter = pro
+                      .where((s) => s.name.toLowerCase().contains(input))
+                      .toList();
+                  return fillter.map(
+                        (pro) => ListTile(
+                      leading: Image.asset(
+                        pro.img,
+                        width: 50,
+                        height: 50,
+                        fit: BoxFit.cover,
+                      ),
+                      title: Text(pro.name),
+                      subtitle: Text("Rp ${pro.price}"),
+                      onTap: () {
+                        controller.closeView(pro.name);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetProduct(id: pro.id),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+            ),
             Text(
               "",
               style: TextStyle(
@@ -71,10 +108,53 @@ class _MenuPageState extends State<MenuPage> {
           ),
         ),
       ),
-      endDrawer: Drawer(
+      drawer: Drawer(
         child: Column(
           children: [
-            SizedBox(height: 20),
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.zero,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.blue, Colors.blueAccent],
+                ),
+              ),
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start),
+            ),
+
+            ListTile(
+              leading: Icon(Icons.arrow_back_ios_new),
+              title: Text("Back"),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            SizedBox(width: 15),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text("Home"),
+              onTap: () {
+                Navigator.pop(context);
+                setState(() => selected = 0);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.favorite),
+              title: Text("favorite"),
+              onTap: () {
+                Navigator.pop(context);
+                setState(() => selected = 1);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.shopping_cart),
+              title: Text("Cart"),
+              onTap: () {
+                Navigator.pop(context);
+                setState(() => selected = 2);
+              },
+            ),
+
             ListTile(
               leading: Icon(Icons.person),
               title: Text("Profile"),
@@ -87,30 +167,30 @@ class _MenuPageState extends State<MenuPage> {
               leading: Icon(Icons.settings_outlined),
               title: Text("Settings"),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SettingsPage()),
-                );
+                Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.shopping_cart_outlined),
-              title: Text("Chart"),
+              leading: Icon(Icons.location_on_outlined),
+              title: Text("address"),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ChartPage()),
-                );
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.receipt_long_outlined),
+              title: Text("Pesanan"),
+              onTap: () {
+                Navigator.pop(context);
               },
             ),
             ListTile(
               leading: Icon(Icons.logout_outlined),
               title: Text("LogOut"),
               onTap: () {
-                Navigator.pop(context);
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SplasScreen()),
+                  MaterialPageRoute(builder: (context) => LoginPage()),
                 );
               },
             ),

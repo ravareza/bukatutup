@@ -231,12 +231,12 @@ class _RegisterPageState extends State<RegisterPage>{
                           style: ButtonStyle(fixedSize: WidgetStatePropertyAll(Size(200, 1),),backgroundColor: WidgetStatePropertyAll( Colors.redAccent,)),
                           onPressed: () {
                             setState(() {
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MenuPage(),));
                               if (_confirmpassword.text == _password.text &&
                                   _username.text.isNotEmpty &&
                                   _password.text.isNotEmpty &&
                                   _nama.text.isNotEmpty
                               ) {
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MenuPage(),));
                                 showDialog(
                                   context: context,
                                   builder: (context) =>

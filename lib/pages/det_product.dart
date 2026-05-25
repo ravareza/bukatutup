@@ -42,17 +42,16 @@ class _DetProductState extends State<DetProduct> {
           ),
           Card(
             color: Colors.white,
-            child: Text(product.desk, style: TextStyle(fontSize: 20)),
+            child: Row(mainAxisAlignment: MainAxisAlignment.start,children: [Text(product.name, style: TextStyle(fontSize: 20)),Text(product.desk)],)
           ),
           Card(
-            child: Row(
+            child: Column(
               children: [
                 Icon(Icons.star, color: Colors.yellow, size: 20),
                 Text(
                   product.ratings.toString(),
                   style: TextStyle(fontSize: 20),
                 ),
-                SizedBox(width: 280),
                 Text(product.price, style: TextStyle(fontSize: 20)),
               ],
             ),
