@@ -10,9 +10,6 @@ class ElectronicPage extends StatefulWidget {
 class _ElectronicPageState extends State<ElectronicPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Electronic")),
-      body: Center(child: Text("Coming Soon")),
-    );
+    return const Placeholder();
   }
 }

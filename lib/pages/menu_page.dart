@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:project_uas/models/menu_model.dart';
+import 'package:project_uas/pages/address_page.dart';
+import 'package:project_uas/pages/order_page.dart';
 import 'package:project_uas/pages/profile_page.dart';
+import 'package:project_uas/pages/settings_page.dart';
+import 'package:project_uas/pages/splas_screen.dart';
 import 'cart_page.dart';
 import 'favorite_page.dart';
 import 'home_page.dart';
@@ -129,21 +133,30 @@ class _MenuPageState extends State<MenuPage> {
               leading: Icon(Icons.settings_outlined),
               title: Text("Settings"),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SettingsPage()),
+                );
               },
             ),
             ListTile(
               leading: Icon(Icons.location_on_outlined),
-              title: Text("address"),
+              title: Text("Address"),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddressPage()),
+                );
               },
             ),
             ListTile(
               leading: Icon(Icons.receipt_long_outlined),
-              title: Text("Pesanan"),
+              title: Text("Order"),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => OrderPage()),
+                );
               },
             ),
             ListTile(
@@ -151,6 +164,10 @@ class _MenuPageState extends State<MenuPage> {
               title: Text("LogOut"),
               onTap: () {
                 Navigator.pop(context);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => SplasScreen()),
+                );
               },
             ),
           ],
