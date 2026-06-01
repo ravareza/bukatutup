@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../services/catprofile_service.dart';
+import 'package:project_uas/services/catprofile_service.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -18,7 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           Container(
             width: size.width,
-            padding: EdgeInsets.all(50),
+            padding: EdgeInsets.all(10),
             decoration: BoxDecoration(color: Colors.blue),
             child: Column(
               children: [
@@ -42,43 +42,37 @@ class _ProfilePageState extends State<ProfilePage> {
                   'selamat datang!',
                   style: TextStyle(fontSize: 15, color: Colors.white),
                 ),
-                SizedBox(
-                  width: size.width,
-                  child: GridView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4,
-                      childAspectRatio: 1.4,
-                    ),
-                    itemCount: cp.length,
-                    itemBuilder: (context, index) => GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => cp[index].page,
-                          ),
-                        );
-                      },
-                      child: Card(
-                        elevation: 5,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              cp[index].icon,
-                              color: cp[index].color,
-                              size: 30,
-                            ),
-                            Text(cp[index].label),
-                          ],
-                        ),
-                      ),
+              ],
+            ),
+          ),
+          Container(
+            width: size.width,
+            height: 110,
+            padding: EdgeInsets.all(10),
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                childAspectRatio: 1.9,
+              ),
+              itemCount: cp.length,
+              itemBuilder: (context, i) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => cp[i].page),
+                    );
+                  },
+                  child: Card(
+                    elevation: 5,
+                    margin: EdgeInsets.all(5),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [Icon(cp[i].icon), Text(cp[i].label)],
                     ),
                   ),
-                ),
-              ],
+                );
+              },
             ),
           ),
         ],

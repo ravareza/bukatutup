@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project_uas/models/menu_model.dart';
-import 'package:project_uas/pages/address_page.dart';
-import 'package:project_uas/pages/order_page.dart';
 import 'package:project_uas/pages/profile_page.dart';
 import 'package:project_uas/pages/settings_page.dart';
 import 'package:project_uas/pages/splas_screen.dart';
@@ -18,7 +16,6 @@ class MenuPage extends StatefulWidget {
 
 class _MenuPageState extends State<MenuPage> {
   int selected = 0;
-
   late final Map<int, MenuModel> apa;
 
   @override
@@ -74,53 +71,10 @@ class _MenuPageState extends State<MenuPage> {
           ),
         ),
       ),
-      drawer: Drawer(
+      endDrawer: Drawer(
         child: Column(
           children: [
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.zero,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.blue, Colors.blueAccent],
-                ),
-              ),
-              child: Column(crossAxisAlignment: CrossAxisAlignment.start),
-            ),
-
-            ListTile(
-              leading: Icon(Icons.arrow_back_ios_new),
-              title: Text("Back"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            SizedBox(width: 15),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text("Home"),
-              onTap: () {
-                Navigator.pop(context);
-                setState(() => selected = 0);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.favorite),
-              title: Text("favorite"),
-              onTap: () {
-                Navigator.pop(context);
-                setState(() => selected = 1);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.shopping_cart),
-              title: Text("Cart"),
-              onTap: () {
-                Navigator.pop(context);
-                setState(() => selected = 2);
-              },
-            ),
-
+            SizedBox(height: 20),
             ListTile(
               leading: Icon(Icons.person),
               title: Text("Profile"),
@@ -140,22 +94,12 @@ class _MenuPageState extends State<MenuPage> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.location_on_outlined),
-              title: Text("Address"),
+              leading: Icon(Icons.shopping_cart_outlined),
+              title: Text("Chart"),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AddressPage()),
-                );
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.receipt_long_outlined),
-              title: Text("Order"),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => OrderPage()),
+                  MaterialPageRoute(builder: (context) => ChartPage()),
                 );
               },
             ),
