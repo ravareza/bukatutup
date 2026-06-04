@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_uas/services/catprofile_service.dart';
+import '../services/catprofile.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

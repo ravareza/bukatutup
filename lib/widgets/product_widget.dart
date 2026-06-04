@@ -9,6 +9,7 @@ class ProductWidget extends StatefulWidget {
   final VoidCallback onTap;
   final VoidCallback onfavorite;
   final double width, height;
+  final String addr;
   const ProductWidget({
     super.key,
     required this.name,
@@ -17,7 +18,7 @@ class ProductWidget extends StatefulWidget {
     required this.img,
     required this.onfavorite,
     required this.width,
-    required this.height, required this.isfavorite, required this.onTap,
+    required this.height, required this.isfavorite, required this.onTap, required this.addr,
   });
   @override
   State<ProductWidget> createState() => _ProductWidgetState();
@@ -51,7 +52,6 @@ class _ProductWidgetState extends State<ProductWidget> {
               SizedBox(height: 5),
               Column(
                 children: [
-
                       Text(
                         widget.name,
                         style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
@@ -62,8 +62,8 @@ class _ProductWidgetState extends State<ProductWidget> {
                       Row(
                         children: [
                           Icon(Icons.star, color: Colors.yellowAccent),
-                          Text(widget.ratings, style: TextStyle(fontSize: 12)),
-                        ],
+                          Text(widget.ratings, style: TextStyle(fontSize: 12)),SizedBox(width: 130,),Text(widget.addr, style: TextStyle(fontSize: 12),
+                          )],
                       ),
                     ],
                   ),

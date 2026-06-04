@@ -9,13 +9,18 @@ class ProductModel {
   final String img;
   final String desk;
   final int id;
+  String pay;
+  String deliv;
+  DateTime? favoriteadd;
+  final String addres;
 
-  ProductModel({
+  ProductModel({required this.deliv,
+    required this.pay,
     required this.name,
     required this.price,
     required this.ratings,
     required this.favorite,
     required this.chart,
-    required this.img, required this.desk, required this.id,
+    required this.img, required this.desk, required this.id,this.favoriteadd, required this.addres,
   });
 }

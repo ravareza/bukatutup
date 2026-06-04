@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:project_uas/models/product_model.dart';
 
 import '../services/product_list.dart';
 
 class ChartPage extends StatefulWidget {
-  const ChartPage({super.key});
+  final ProductModel id;
+  const ChartPage({super.key, required this.id});
 
   @override
   State<ChartPage> createState() => _ChartPageState();
@@ -12,10 +14,15 @@ class ChartPage extends StatefulWidget {
 class _ChartPageState extends State<ChartPage> {
   @override
   Widget build(BuildContext context) {
-    bool remember = true;
     var size = MediaQuery.of(context).size;
-    var unchart = pro.where((element) => element.chart == true).toList();
+    final unchart = pro.where((element) => element.chart == true).toList();
+
     return Scaffold(
+      appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(color: Colors.lightBlue),
+        ),
+      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: SizedBox(
@@ -30,12 +37,13 @@ class _ChartPageState extends State<ChartPage> {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [Card(child: Text("Chart"),)],
+                      children: [Card(child: Text("Chart"))],
                     ),
                     SizedBox(
                       width: size.width - 60,
                       height: size.height,
                       child: ListView.builder(
+                        shrinkWrap: true,
                         itemCount: unchart.length,
                         itemBuilder: (context, s) {
                           if (unchart[s].chart == true) {
@@ -47,14 +55,6 @@ class _ChartPageState extends State<ChartPage> {
                                 padding: const EdgeInsets.all(8),
                                 child: Row(
                                   children: [
-                                    Checkbox(
-                                      value: remember,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          remember = !remember;
-                                        });
-                                      },
-                                    ),
                                     Image.asset(
                                       unchart[s].img,
                                       width: 80,
@@ -67,31 +67,29 @@ class _ChartPageState extends State<ChartPage> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            unchart[s].name,
+                                          Text("Product:${unchart[s].name}",
+
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                          Text(
-                                            unchart[s].price.toString(),
+                                          SizedBox(height: 5),
+                                          Text("Price: ${unchart[s].price.toString()}"
+                                            ,
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                          Row(
-                                            children: [
-                                              Icon(
-                                                Icons.star,
-                                                color: Colors.yellow,
-                                              ),
-                                              Text(
-                                                unchart[s].ratings.toString(),
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ],
+                                          Text("Payment: ${ unchart[s].pay}"
+                                           ,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text("Deliveri: ${ unchart[s].deliv}",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
                                           Row(
                                             mainAxisAlignment:
@@ -100,14 +98,16 @@ class _ChartPageState extends State<ChartPage> {
                                               ElevatedButton(
                                                 onPressed: () {
                                                   setState(() {
-                                                    pro[s].chart =
-                                                        !pro[s].chart;
+                                                    unchart[s].chart =
+                                                        !unchart[s].chart;
                                                     ;
                                                   });
                                                 },
-                                                child: Icon(
-                                                  Icons.shopping_cart,
-                                                  color: Colors.green,
+                                                child: Text(
+                                                  'Cancel',
+                                                  style: TextStyle(
+                                                    color: Colors.red,
+                                                  ),
                                                 ),
                                               ),
                                             ],

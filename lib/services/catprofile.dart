@@ -11,11 +11,6 @@ List<Catprofile> cp = [
     page: FavoritePage(),
   ),
   Catprofile(
-    icon: Icons.shopping_cart,
-    label: "Chart",
-    page: ChartPage(),
-  ),
-  Catprofile(
     icon: Icons.settings,
     label: "Settings",
     page: SettingsPage(),

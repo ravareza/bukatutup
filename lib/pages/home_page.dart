@@ -7,6 +7,7 @@ import 'package:project_uas/widgets/banner_header.dart';
 import 'package:project_uas/widgets/product_widget.dart';
 
 import '../services/category_service.dart';
+import 'favorite_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,6 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var nonFavorite = pro.where((p) => p.favorite == false).toList();
+    var trueFavorite = pro.where((p) => p.favorite == true).toList();
     var size = MediaQuery.of(context).size;
     return Scaffold(
       body: SizedBox(
@@ -27,8 +29,41 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              //searcbar
-
+              //search
+              SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: SearchAnchor.bar(
+                  barHintText: "Search",
+                  suggestionsBuilder:
+                      (BuildContext context, SearchController controller) {
+                    String input = controller.value.text.toLowerCase();
+                    var fillter = pro
+                        .where((s) => s.name.toLowerCase().contains(input))
+                        .toList();
+                    return fillter.map(
+                          (pro) => ListTile(
+                        leading: Image.asset(
+                          pro.img,
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.cover,
+                        ),
+                        title: Text(pro.name),
+                        subtitle: Text("Rp ${pro.price}"),
+                        onTap: () {
+                          controller.closeView(pro.name);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetProduct(id: pro.id),
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  },
+                ),
+              ),
               //categories
               Container(
                 width: size.width,
@@ -41,14 +76,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   itemCount: cat.length,
                   itemBuilder: (context, s) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => cat[s].page),
-                        );
-                      },
-                      child: Card(
+                    return Card(
                         elevation: 5,
                         margin: EdgeInsets.all(5),
                         child: Column(
@@ -58,7 +86,6 @@ class _HomePageState extends State<HomePage> {
                             Text(cat[s].labelcat),
                           ],
                         ),
-                      ),
                     );
                   },
                 ),
@@ -73,8 +100,113 @@ class _HomePageState extends State<HomePage> {
                   children: List.generate(banner.length, (index) => BannerHeader(imageAsset: banner[index].imageAsset),)
                 ),
               ),
+              //favorite
+        GestureDetector(
+          child: Container(
+          width: size.width,
+            margin: EdgeInsetsGeometry.all(30),
+            child:
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Favorite"),
+                    TextButton(
+                      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => FavoritePage(),));},
+                      child: Row(children: [Icon(Icons.list), Text("All")]),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: size.width - 50,
+                  height: 150,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: trueFavorite.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, s) {
+                        if (pro[s].favorite == true) {
+                          return Card(
+                            elevation: 5,
+                            child: Container(
+                              width: size.width - 150,
+                              height: 200,
+                              padding: const EdgeInsets.all(8),
+                              child: Row(
+                                children: [
+
+                                  Image.asset(
+                                    trueFavorite[s].img,
+                                    width: 80,
+                                    height: 80,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  SizedBox(width: 15),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          trueFavorite[s].name,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Text(
+                                          trueFavorite[s].price.toString(),
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Row(children: [
+                                          Icon(
+                                            Icons.star, color: Colors.yellow,),
+                                          Text(
+                                            trueFavorite[s].ratings.toString(),
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ]
+
+                                        ),
+
+                                        Row(mainAxisAlignment: MainAxisAlignment
+                                            .end,
+                                          children: [
+                                            IconButton(
+                                              icon: Icon(
+                                                Icons.favorite,
+                                                color: Colors.red,
+                                              ),
+                                              onPressed: () {
+                                                setState(() {
+                                                  pro[s].favorite =
+                                                  !pro[s].favorite;
+                                                });
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }
+                      },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
               //pruduct
-              GestureDetector(
+          GestureDetector(
                 child: Container(
                   width: size.width,
                   height: pro.length / 2 * 240,
@@ -96,7 +228,7 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => DetProduct(id: pro[s].id),
+                              builder: (context) => DetProduct(id: nonFavorite[s].id),
                             ),
                           );
                         },
@@ -108,11 +240,12 @@ class _HomePageState extends State<HomePage> {
                         onfavorite: () {
                           setState(() {
                             nonFavorite[s].favorite = true;
+                            nonFavorite[s].favoriteadd = DateTime.now();
                           });
                         },
                         width: size.width / 2,
                         height: 200,
-                        isfavorite: nonFavorite[s].favorite,
+                        isfavorite: nonFavorite[s].favorite, addr: nonFavorite[s].addres,
                       );
                     },
                   ),

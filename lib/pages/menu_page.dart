@@ -4,8 +4,6 @@ import 'package:project_uas/pages/login_page.dart';
 import 'package:project_uas/pages/profile_page.dart';
 import '../services/product_list.dart';
 import 'cart_page.dart';
-import 'det_product.dart';
-import 'favorite_page.dart';
 import 'home_page.dart';
 
 class MenuPage extends StatefulWidget {
@@ -31,18 +29,12 @@ class _MenuPageState extends State<MenuPage> {
         color: Colors.blue,
       ),
       1: MenuModel(
-        label: "Favorite",
-        icon: Icons.favorite,
-        color: Colors.blue,
-        page: FavoritePage(),
-      ),
-      2: MenuModel(
         label: "Cart",
         icon: Icons.shopping_cart,
         color: Colors.blue,
-        page: ChartPage(),
+        page: ChartPage(id: pro.first,),
       ),
-      3: MenuModel(
+      2: MenuModel(
         label: "Profile",
         page: ProfilePage(),
         icon: Icons.person,
@@ -55,44 +47,10 @@ class _MenuPageState extends State<MenuPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: SearchAnchor.bar(
-
-                barHintText: "Search",
-                suggestionsBuilder:
-                    (BuildContext context, SearchController controller) {
-                  String input = controller.value.text.toLowerCase();
-                  var fillter = pro
-                      .where((s) => s.name.toLowerCase().contains(input))
-                      .toList();
-                  return fillter.map(
-                        (pro) => ListTile(
-                      leading: Image.asset(
-                        pro.img,
-                        width: 50,
-                        height: 50,
-                        fit: BoxFit.cover,
-                      ),
-                      title: Text(pro.name),
-                      subtitle: Text("Rp ${pro.price}"),
-                      onTap: () {
-                        controller.closeView(pro.name);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetProduct(id: pro.id),
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                },
-              ),
-            ),
             Text(
               "",
               style: TextStyle(

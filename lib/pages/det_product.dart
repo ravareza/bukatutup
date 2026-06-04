@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_uas/models/product_model.dart';
+import 'package:project_uas/pages/checkout.dart';
 import 'package:project_uas/services/product_list.dart';
 
 class DetProduct extends StatefulWidget {
@@ -42,34 +43,43 @@ class _DetProductState extends State<DetProduct> {
           ),
           Card(
             color: Colors.white,
-            child: Row(mainAxisAlignment: MainAxisAlignment.start,children: [Text(product.name, style: TextStyle(fontSize: 20)),Text(product.desk)],)
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [Row(mainAxisAlignment: MainAxisAlignment.start,children: [ Text(product.name, style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),],),
+
+                Text(product.desk,style: TextStyle(fontFamily: 'italic',fontSize: 17),),
+              ],
+            ),
           ),
           Card(
-            child: Column(
+            child: Row(
               children: [
-                Icon(Icons.star, color: Colors.yellow, size: 20),
+                Icon(Icons.star, color: Colors.orange, size: 20),
                 Text(
                   product.ratings.toString(),
                   style: TextStyle(fontSize: 20),
                 ),
+                SizedBox(width: 280),
                 Text(product.price, style: TextStyle(fontSize: 20)),
               ],
             ),
           ),
           SizedBox(height: 400),
           ElevatedButton(
-            style: ButtonStyle(fixedSize: WidgetStatePropertyAll(Size(size.width - 20, 40),),backgroundColor: WidgetStatePropertyAll( Colors.green,)),
+            style: ButtonStyle(
+              fixedSize: WidgetStatePropertyAll(Size(size.width - 20, 70)),
+              backgroundColor: WidgetStatePropertyAll(Colors.green),
+            ),
             onPressed: () {
-              setState(() {
-                product.chart = !product.chart;
-              });
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Checkout(product: product,),));
             },
             child: Center(
-              child: Row(mainAxisAlignment: MainAxisAlignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.shopping_cart,color: Colors.white,),
+                  Icon(Icons.shopping_bag, color: Colors.white),
                   SizedBox(width: 5),
-                  Text("Add to card",style: TextStyle(color: Colors.white),),
+                  Text("Buy Now", style: TextStyle(color: Colors.white)),
                 ],
               ),
             ),

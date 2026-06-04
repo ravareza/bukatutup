@@ -66,7 +66,7 @@ class _FashFoodState extends State<FashFood> {
                             },
                             width: size.width / 2,
                             height: 200,
-                            isfavorite: electro[ind].favorite,
+                            isfavorite: electro[ind].favorite, addr: electro[ind].addres,
                           );
                         },
                       ),
